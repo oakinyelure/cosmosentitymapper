@@ -3,6 +3,8 @@ on:
   release:
     types:
       - published
+env:
+  NuGetDirectory: ${{ github.workspace}}/nuget
 
 jobs:
   deploy:
@@ -11,6 +13,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.release.target_commitish }}
 
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v3
@@ -21,6 +25,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: artifact
+          path: ${{ env.NuGetDirectory }}
 
       - name: Deploy to NuGet
-        run: dotnet nuget push src/NugetOutput/**/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.COSMOS_ENTITY_MAPPER_SECRET }}
+        run: dotnet nuget push ${{ env.NuGetDirectory }} --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.COSMOS_ENTITY_MAPPER_SECRET }} --skip-duplicate

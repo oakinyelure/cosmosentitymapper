@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - master
+env:
+  NuGetDirectory: ${{ github.workspace}}/nuget
 
 jobs:
   build:
@@ -27,10 +29,12 @@ jobs:
         run: dotnet test Cosmos.Entity.Mapper.sln --configuration Release --no-restore --verbosity normal --logger trx --results-directory test-output
 
       - name: Pack Nuget Package
-        run: dotnet pack Cosmos.Entity.Mapper.sln --configuration Release
+        run: dotnet pack Cosmos.Entity.Mapper.sln --configuration Release  --output ${{ env.NuGetDirectory }}
 
       - name: Upload Package
         uses: actions/upload-artifact@v3
         with:
           name: artifact
-          path: "src/NugetOutput/**/*.nupkg"
+          if-no-files-found: error
+          retention-days: 7
+          path: ${{ env.NuGetDirectory }}/*.nupkg
