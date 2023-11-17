@@ -1,0 +1,1006 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Cosmos.Entity.Mapper</name>
+    </assembly>
+    <members>
+        <member name="T:Cosmos.Entity.Mapper.CollectionSet`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="TDocument"></typeparam>
+        </member>
+        <member name="P:Cosmos.Entity.Mapper.CollectionSet`1.CollectionId">
+            <summary>
+            The Id of the container
+            </summary>
+            <remarks>
+            <para>This can be also refer to the collection or container name</para>
+            </remarks>
+        </member>
+        <member name="P:Cosmos.Entity.Mapper.CollectionSet`1.Container">
+            <summary>
+            The container object the collection will access
+            </summary>
+        </member>
+        <member name="P:Cosmos.Entity.Mapper.CollectionSet`1.OperationsExecutor">
+            <summary>
+            Holds an instance of the operations executor. 
+            </summary>
+        </member>
+        <member name="P:Cosmos.Entity.Mapper.CollectionSet`1.Schema">
+            <summary>
+            Sets the schema definition instance reader used by the collectionset
+            </summary>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.CollectionSet`1.#ctor(Microsoft.Azure.Cosmos.Container)">
+            <summary>
+            Create instance of the the collection set and attach its container
+            </summary>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.CollectionSet`1.OfType``1">
+            <summary>
+            Projects the current instance to another type. 
+            </summary>        
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.CollectionSet`1.FindAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Finds a document from an entity store using the <paramref name="id"/> and the <paramref name="partitionKey"/>
+            </summary>
+            <param name="id"></param>
+            <param name="partitionKey"></param>
+            <param name="cancellationToken"></param>
+            <exception cref="T:Microsoft.Azure.Cosmos.CosmosException" />
+            <returns>Document matching the <paramref name="id"/> and the <paramref name="partitionKey"/></returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.CollectionSet`1.AddAsync(`0,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Adds <paramref name="entity"/> to the <see cref="P:Cosmos.Entity.Mapper.CollectionSet`1.Container"/>
+            </summary>
+            <param name="entity"></param>.
+            <param name="partitionKey"></param>
+            <param name="cancellationToken"></param>
+            <returns>The added entity</returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.CollectionSet`1.AddRangeAsync(System.Collections.Generic.IEnumerable{`0},System.Threading.CancellationToken)">
+            <summary>
+            Adds a collection of <paramref name="documents"/> to the container
+            </summary>
+            <param name="documents"></param>
+            <param name="cancellationToken"></param>
+            <returns>Number of successful oprations</returns>
+            <exception cref="T:Microsoft.Azure.Cosmos.CosmosException" />
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.CollectionSet`1.UpdateAsync(`0,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Replace or creates an existing entity
+            </summary>
+            <remarks>
+            <para>Uses the upsert functionality of the underlying provider. It uses the unique Id of the document to check if the entity exist. If the entity
+            exist, it is replaced with <paramref name="document"/></para>. If not, the entity is created
+            </remarks>
+            <param name="document"></param>
+            <param name="partitionKey"></param>
+            <param name="cancellationToken"></param>
+            <returns>The updated entity</returns>
+            <exception cref="T:Microsoft.Azure.Cosmos.CosmosException" />
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.CollectionSet`1.UpdateRangeAsync(System.Collections.Generic.IEnumerable{`0},System.Threading.CancellationToken)">
+            <summary>
+            Replaces many or creates many documents if they don't exist
+            </summary>
+            <param name="documents"></param>
+            <param name="cancellationToken"></param>
+            <exception cref="T:Microsoft.Azure.Cosmos.CosmosException" />
+            <returns>The number of documents affected</returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.CollectionSet`1.RemoveAsync(`0,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Removes entity from the container
+            </summary>
+            <param name="entity"></param>
+            <param name="cancellationToken"></param>
+            <param name="partitionKey"></param>
+            <returns>Removed entity</returns>
+            <exception cref="T:Microsoft.Azure.Cosmos.CosmosException" />
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.CollectionSet`1.RemoveRangeAsync(System.Collections.Generic.IEnumerable{`0},System.Threading.CancellationToken)">
+            <summary>
+            Removes all the entities in the <paramref name="documents"/> from the container
+            </summary>
+            <param name="documents"></param>
+            <param name="cancellationToken"></param>
+            <exception cref="T:Microsoft.Azure.Cosmos.CosmosException" />
+            <returns>Total number of completed </returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.CollectionSet`1.GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.CollectionSet`1.System#Collections#IEnumerable#GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="P:Cosmos.Entity.Mapper.CollectionSet`1.ElementType">
+            <inheritdoc />
+        </member>
+        <member name="P:Cosmos.Entity.Mapper.CollectionSet`1.Expression">
+            <inheritdoc />
+        </member>
+        <member name="P:Cosmos.Entity.Mapper.CollectionSet`1.Provider">
+            <inheritdoc />
+        </member>
+        <member name="T:Cosmos.Entity.Mapper.CollectionSetInitializer">
+            <summary>
+            An internal API to set instance of a collection set
+            </summary>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.CollectionSetInitializer.InitializeCollectionSet(Cosmos.Entity.Mapper.CosmosDbContext,Microsoft.Azure.Cosmos.Database,Cosmos.Entity.Mapper.ContextOptionsBase)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.CollectionSetInitializer.GetCollectionSetFromContext(Cosmos.Entity.Mapper.CosmosDbContext)">
+            <inheritdoc />
+        </member>
+        <member name="T:Cosmos.Entity.Mapper.ContextOptions">
+            <summary>
+            Holds all the configuration values to set up a <see cref="T:Cosmos.Entity.Mapper.CosmosDbContext"/>
+            </summary>
+        </member>
+        <member name="T:Cosmos.Entity.Mapper.ContextOptionsBase">
+            <summary>
+            A base class for configuring <see cref="T:Cosmos.Entity.Mapper.CosmosDbContext"/> options
+            </summary>
+        </member>
+        <member name="P:Cosmos.Entity.Mapper.ContextOptionsBase.ConnectionString">
+            <summary>
+            The connection string to the database.
+            </summary>
+            <remarks>
+            <para>This is a typical CosmosDb connection string with AccountEndpoint,Account Key and Database. This database is optional but must be defined in the schema of the <see cref="T:Cosmos.Entity.Mapper.CosmosDbContext"/></para>
+            </remarks>
+        </member>
+        <member name="P:Cosmos.Entity.Mapper.ContextOptionsBase.BulkBatchSize">
+            <summary>
+            Configures the batch size of each transaction when in bulk mode
+            </summary>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.ContextOptionsBase.EnforceMinimumConnectionStringRequirementAndThrow(System.Data.Common.DbConnectionStringBuilder,Cosmos.Entity.Mapper.CosmosDbContext)">
+            <summary>
+            Checks a CosmosDb ConnectionString to evaluate the minimum requirements for a successful connection
+            </summary>
+            <param name="connectionStringBuilder"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:Cosmos.Entity.Mapper.CosmosDbContext">
+            <summary>
+            A CosmosDbContext instance represents an instance of a cosmos database. it can be used to access all
+            documents in the database using a combination of unit of work and repository patterns
+            </summary>
+            <remarks>
+            <para>
+            An instance of the <see cref="T:Cosmos.Entity.Mapper.CosmosDbContext"/> can be used in multiple parallel operations. Each Collection has a new instance of 
+            associated collection and can be used in parallel
+            </para>
+            <para>
+            Like most entity mappers, you need to create a class that extends the <see cref="T:Cosmos.Entity.Mapper.CosmosDbContext"/>. The class must contain properties of type <see cref="T:Cosmos.Entity.Mapper.CollectionSet`1"/>
+            This will give you access to the repository
+            </para>
+            <para>
+            Each collection is automatically initialized so you won't need to new them up
+            </para>
+            <para>No migration, scaffolding or configuration is needed.</para>
+            </remarks>
+        </member>
+        <member name="P:Cosmos.Entity.Mapper.CosmosDbContext.Database">
+            <summary>
+            Instance of the cosmos database
+            </summary>
+            <remarks>
+            <para>
+            Exposes all Cosmosb DB public API. This allows you to use the native SDK, run query and other operations on the database
+            </para>
+            </remarks>
+        </member>
+        <member name="P:Cosmos.Entity.Mapper.CosmosDbContext.Client">
+            <summary>
+            Interact directly with the CosmosDB client
+            </summary>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.CosmosDbContext.#ctor(Cosmos.Entity.Mapper.ContextOptionsBase)">
+            <summary>
+            Configures the <see cref="T:Cosmos.Entity.Mapper.CosmosDbContext"/> using <see cref="T:Cosmos.Entity.Mapper.ContextOptionsBase"/>
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.CosmosDbContext.#ctor(System.String)">
+            <summary>
+            Configures instance of the <see cref="T:Cosmos.Entity.Mapper.CosmosDbContext" /> using <paramref name="connectionString"/> and default configuration options
+            </summary>
+            <remarks>
+            <para>The database name can either be in the <paramref name="connectionString"/> or added using the <see cref="T:Cosmos.Entity.Mapper.Schema.DatabaseAttribute"/></para>
+            </remarks>
+            <param name="connectionString">
+            <para><paramref name="connectionString"/> Must contain a typical cosmos db connection string. This should include the AccountName and Account Key at the least</para>
+            </param>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.CosmosDbContext.Dispose">
+            <summary>
+            Performs cleanup of used resources
+            </summary>
+        </member>
+        <member name="T:Cosmos.Entity.Mapper.Diagnostics.Logging.DiagnosticsLogger">
+            <summary>
+                This is an internal API that supports the Cosmos Entity Mapper infrastructure and not subject to the 
+                same compatibility standard as public APIS. It may be changed or removed without notive in any release
+            </summary>
+        </member>
+        <member name="P:Cosmos.Entity.Mapper.Diagnostics.Logging.DiagnosticsLogger.LoggerFactory">
+            <summary>
+            Logger factory
+            </summary>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Diagnostics.Logging.DiagnosticsLogger.LogOperationsResult``1(Microsoft.Azure.Cosmos.ItemResponse{``0})">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Diagnostics.Logging.DiagnosticsLogger.Log(Microsoft.Extensions.Logging.LogLevel,System.String,System.Object[])">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Diagnostics.Logging.DiagnosticsLogger.LogCosmosException(Microsoft.Azure.Cosmos.CosmosException)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Diagnostics.Logging.DiagnosticsLogger.LogOperationsResult``1(Microsoft.Azure.Cosmos.FeedResponse{``0})">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Diagnostics.Logging.DiagnosticsLogger.LogOperationsResult``1(Microsoft.Azure.Cosmos.ResponseMessage)">
+            <inheritdoc />
+        </member>
+        <member name="T:Cosmos.Entity.Mapper.Diagnostics.Logging.IDiagnosticsLogger">
+            <summary>
+            Contract for the internal diagnostics logger
+            </summary>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Diagnostics.Logging.IDiagnosticsLogger.LogOperationsResult``1(Microsoft.Azure.Cosmos.ItemResponse{``0})">
+            <summary>
+            Logs an operations result from <see cref="T:Microsoft.Azure.Cosmos.ItemResponse`1"/> using configured logging providers
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <param name="operationsResult"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Diagnostics.Logging.IDiagnosticsLogger.LogOperationsResult``1(Microsoft.Azure.Cosmos.FeedResponse{``0})">
+            <summary>
+            Logs an operations result from <see cref="T:Microsoft.Azure.Cosmos.FeedResponse`1"/>
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <param name="operationsResult"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Diagnostics.Logging.IDiagnosticsLogger.LogOperationsResult``1(Microsoft.Azure.Cosmos.ResponseMessage)">
+            <summary>
+            Logs the result of an operation returning a <see cref="T:Microsoft.Azure.Cosmos.ResponseMessage" />
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <param name="operationsResult"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Diagnostics.Logging.IDiagnosticsLogger.Log(Microsoft.Extensions.Logging.LogLevel,System.String,System.Object[])">
+            <summary>
+            Logs a message using the configured logging providers
+            </summary>
+            <remarks>
+            <para>This is an internal API and not subject to public use. </para>
+            </remarks>
+            <param name="level"></param>
+            <param name="message"></param>
+            <param name="args"></param>
+            <returns><see cref="T:Cosmos.Entity.Mapper.Diagnostics.Logging.DiagnosticsLogger"/> to allow method chaining</returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Diagnostics.Logging.IDiagnosticsLogger.LogCosmosException(Microsoft.Azure.Cosmos.CosmosException)">
+            <summary>
+            Logs a <see cref="T:Microsoft.Azure.Cosmos.CosmosException"/> object in the form
+            </summary>
+                    /// <remarks>
+            <para>This is an internal API and not subject to public use. </para>
+            </remarks>
+            <param name="exception"></param>
+        </member>
+        <member name="T:Cosmos.Entity.Mapper.Extensions.CosmosEntityMapperServiceCollectionExtensions">
+            <summary>
+            <see cref="N:Cosmos.Entity.Mapper"/> specific extension methods for <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>
+            </summary>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Extensions.CosmosEntityMapperServiceCollectionExtensions.AddCosmosEntityMapper``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Cosmos.Entity.Mapper.ContextOptionsBase)">
+            <summary>
+            Registers the given cosmos entity mapper <typeparamref name="TContext"/> as a service in the <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>
+            and configures it to connect to the instance of the Cosmos Db using the <see cref="M:Cosmos.Entity.Mapper.CosmosDbContext.#ctor(Cosmos.Entity.Mapper.ContextOptionsBase)"/> constructor
+            </summary>
+            <typeparam name="TContext"></typeparam>
+            <param name="services"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Extensions.CosmosEntityMapperServiceCollectionExtensions.AddCosmosEntityMapper``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)">
+            <summary>
+            Registers the given cosmos entity mapper <typeparamref name="TContext"/> as a service in the <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>
+            and configures it to connect to the instance of the Cosmos Db using the <see cref="M:Cosmos.Entity.Mapper.CosmosDbContext.#ctor(System.String)"/> constructor
+            </summary>
+            <typeparam name="TContext"></typeparam>
+            <param name="services"></param>
+            <param name="connectionString"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Entity.Mapper.Extensions.QueryableExtensions">
+            <summary>
+            Extension methods specific to IQueryables
+            </summary>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Extensions.QueryableExtensions.PaginateByOffset``1(System.Linq.IOrderedQueryable{``0},System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Adds a pagination using an offset like a traditional RDMS would
+            </summary>
+            <typeparam name="TDocument"></typeparam>
+            <param name="query"></param>
+            <param name="page"></param>
+            <param name="pageSize"></param>
+            <remarks>
+            This approach is not recommended per Microsoft as it is prone to some issues. It should not be used where all these factors may apply
+            <para>Ordering must be unique to get the best out of pagination. Might not get consistent result if entity identity is not properly designed</para>
+            <para>Concurrent updates in the database will be skipped or might get included in a different page</para>
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Extensions.QueryableExtensions.PaginateByOffset``1(System.Linq.IQueryable{``0},System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Adds a pagination using an offset like a traditional RDMS would
+            </summary>
+            <typeparam name="TDocument"></typeparam>
+            <param name="query"></param>
+            <param name="page"></param>
+            <param name="pageSize"></param>
+            <remarks>
+            This approach is not recommended per Microsoft as it is prone to some issues. It should not be used where all these factors may apply
+            <para>Ordering must be unique to get the best out of pagination. Might not get consistent result if entity identity is not properly designed</para>
+            <para>Concurrent updates in the database will be skipped or might get included in a different page</para>
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Entity.Mapper.Extensions.TaskExtensions">
+            <summary>
+            This is an internal API that supports the Cosmos Entity Mapper core infrastructure and not subject to the same compatibility
+            standards as public APIs. The use in production environment is highly discouraged. Changes or updates can occur without notice
+            </summary>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Extensions.TaskExtensions.ExecuteInParallelAsync(System.Collections.Generic.IEnumerable{System.Threading.Tasks.Task},System.Nullable{System.Int32})">
+            <summary>
+            This is an internal API that supports the Cosmos Entity Mapper core infrastructure and not subject to the same compatibility
+            standards as public APIs. The use in production environment is highly discouraged. Changes or updates can occur without notice
+            </summary>
+            <param name="tasks"></param>
+            <param name="batchSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Extensions.TaskExtensions.ExecuteInParallelAsync(System.Collections.Generic.IEnumerable{System.Func{System.Threading.Tasks.Task}},System.Nullable{System.Int32})">
+            <summary>
+            This is an internal API that supports the Cosmos Entity Mapper core infrastructure and not subject to the same compatibility
+            standards as public APIs. The use in production environment is highly discouraged. Changes or updates can occur without notice
+            </summary>
+            <param name="tasks"></param>
+            <param name="batchSize"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Entity.Mapper.MaterializationExtensions">
+            <summary>
+            Cosmos Entity Mapper related extensions
+            </summary>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.MaterializationExtensions.AsMaterializable``1(System.Linq.IQueryable{``0})">
+            <summary>
+            Provides a facade or an interface to actualize the query.
+            </summary>
+            <remarks>
+            <para>This was added to ease unit testing. The entity mapper depends on a lot extension methods to materialize queries. This can be
+            difficult to test. The <see cref="T:Cosmos.Entity.Mapper.IQueryMaterializable`1"/> interface provides the same methods thereby enabling developers to mock
+            the behavior of each method. Behind the scene, the methods calls the same extension methods you would otherwise use to materialize the query directly</para>
+            <para>If unit testing is a requirement for your team, this approach is highly recommended</para>
+            </remarks>
+            <typeparam name="TDocument"></typeparam>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.MaterializationExtensions.AsEnumerableAsync``1(System.Linq.IQueryable{``0},System.Threading.CancellationToken)">
+            <summary>
+            Actualizes the <see cref="T:System.Linq.IQueryable`1"/> to an enumerable and returns a list 
+            of <typeparamref name="TDocument"/>
+            </summary>
+            <param name="cancellationToken"></param>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.MaterializationExtensions.ToListAsync``1(System.Linq.IQueryable{``0},System.Threading.CancellationToken)">
+            <summary>
+            Materializes the <see cref="T:Cosmos.Entity.Mapper.IQueryExecutor`1"/> to a list
+            </summary>
+            <param name="cancellationToken"></param>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.MaterializationExtensions.ToEnumerableAsync``1(System.Linq.IQueryable{``0},System.Threading.CancellationToken)">
+            <summary>
+            Actualizes the <see cref="T:System.Linq.IQueryable`1"/> to an enumerable and returns a list 
+            of <typeparamref name="TDocument"/>
+            </summary>
+            <typeparam name="TDocument"></typeparam>
+            <param name="source"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.MaterializationExtensions.FirstOrDefaultAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)">
+            <summary>
+            Uses the feed iterator to get the first element in the sequence. Returns null if no item
+            is in the sequence
+            </summary>
+            <typeparam name="TDocument"></typeparam>
+            <param name="source"></param>
+            <param name="predicate"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.MaterializationExtensions.FirstAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)">
+            <summary>
+            Like <see cref="M:Cosmos.Entity.Mapper.MaterializationExtensions.FirstOrDefaultAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)"/>, this returns the first element in the sequence. However it throws a
+            <see cref="T:System.InvalidOperationException"/> exception if no item is in the sequence
+            </summary>
+            <param name="predicate"></param>
+            <param name="cancellationToken"></param>
+            <param name="source"></param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.MaterializationExtensions.SingleAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)">
+            <summary>
+            Like <see cref="M:Cosmos.Entity.Mapper.MaterializationExtensions.FirstAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)"/>, <see cref="M:Cosmos.Entity.Mapper.MaterializationExtensions.SingleAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)"/> returns the first element in a sequence but throws an <see cref="T:System.InvalidOperationException"/> exception
+            if there are no element or if there more than one item in the sequence
+            </summary>
+            <param name="cancellationToken"></param>
+            <param name="predicate"></param>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.MaterializationExtensions.SingleOrDefaultAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)">
+            <summary>
+            Like <see cref="M:Cosmos.Entity.Mapper.MaterializationExtensions.FirstOrDefaultAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)"/>, this also returns the first element in the sequence or null if no item is in the sequence
+            <para>However, will throw <see cref="T:System.InvalidOperationException"/> if there are more than one item in the sequence</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <param name="predicate"></param>
+            <param name="source"></param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.MaterializationExtensions.CountAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously gets the count of item in a sequence.
+            </summary>
+            <remarks>
+            <para>
+            Like all the other query actualization method, it relies on the <see cref="T:Microsoft.Azure.Cosmos.FeedIterator"/>
+            </para>
+            </remarks>
+            <param name="predicate"></param>
+            <param name="cancellationToken"></param>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.MaterializationExtensions.AnyAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)">
+            <summary>
+            Checks if any document is in the sequence.
+            </summary>
+            <param name="predicate"></param>
+            <param name="cancellationToken"></param>
+            <param name="source"></param>
+            <returns>Returns true if there is at least one document in the sequence. Returns false otherwise</returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.MaterializationExtensions.AllAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)">
+            <summary>
+            Checks if all documents in the sequence passes the test in the specified <paramref name="predicate"/>
+            </summary>
+            <param name="predicate"></param>
+            <param name="cancellationToken"></param>
+            <param name="source"></param>
+            <returns>
+            <para>A task representing the asynchronous result. Would return <see langword="true"/> if every document in the sequence matches the predicate</para>
+            </returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.ICollectionSetInitializer.InitializeCollectionSet(Cosmos.Entity.Mapper.CosmosDbContext,Microsoft.Azure.Cosmos.Database,Cosmos.Entity.Mapper.ContextOptionsBase)">
+            <summary>
+            Initializes all <see cref="T:Cosmos.Entity.Mapper.CollectionSet`1"/> properties within a <see cref="T:Cosmos.Entity.Mapper.CosmosDbContext"/>
+            </summary>
+            <param name="context"></param>
+            <param name="database"></param>
+            <param name="options"></param>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.ICollectionSetInitializer.GetCollectionSetFromContext(Cosmos.Entity.Mapper.CosmosDbContext)">
+            <summary>
+            Returns all properties defined in the <see cref="T:Cosmos.Entity.Mapper.CosmosDbContext"/> that can be initialized as a CollectionSet
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Entity.Mapper.Internal.InternalCollectionSet`1">
+            <summary>
+            This is an internal API to support the creation of the <see cref="T:Cosmos.Entity.Mapper.CollectionSet`1"/> and is not generally available
+            It may be changed or removed without notice. Use with caution as it could affect the behavior of your application
+            </summary>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Internal.InternalCollectionSet`1.#ctor(Microsoft.Azure.Cosmos.Container,Cosmos.Entity.Mapper.ContextOptionsBase)">
+            <summary>
+            Instantiate base container
+            </summary>
+            <param name="container"></param>
+            <param name="configuratationOptions"></param>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Internal.InternalCollectionSet`1.CreateEntityQueryable(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Internal.InternalCollectionSet`1.FindAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Internal.InternalCollectionSet`1.OfType``1">
+            <inheritdoc />
+        </member>
+        <member name="P:Cosmos.Entity.Mapper.Internal.InternalCollectionSet`1.System#Linq#IQueryable#Provider">
+            <inheritdoc />
+        </member>
+        <member name="P:Cosmos.Entity.Mapper.Internal.InternalCollectionSet`1.System#Linq#IQueryable#Expression">
+            <inheritdoc />
+        </member>
+        <member name="P:Cosmos.Entity.Mapper.Internal.InternalCollectionSet`1.System#Linq#IQueryable#ElementType">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Internal.InternalCollectionSet`1.System#Collections#Generic#IEnumerable{TDocument}#GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Internal.InternalCollectionSet`1.GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Internal.InternalCollectionSet`1.AddAsync(`0,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Internal.InternalCollectionSet`1.AddRangeAsync(System.Collections.Generic.IEnumerable{`0},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Internal.InternalCollectionSet`1.UpdateAsync(`0,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+            <param name="document"></param>
+            <param name="partitionKey"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Internal.InternalCollectionSet`1.UpdateRangeAsync(System.Collections.Generic.IEnumerable{`0},System.Threading.CancellationToken)">
+            <inheritdoc />
+            <param name="documents"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Internal.InternalCollectionSet`1.RemoveAsync(`0,System.String,System.Threading.CancellationToken)">
+            <param name="document"></param>
+            <param name="cancellationToken"></param>
+            <param name="partitionKey"></param>
+            <inheritdoc />
+            <exception cref="T:Microsoft.Azure.Cosmos.CosmosException"></exception>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Internal.InternalCollectionSet`1.RemoveRangeAsync(System.Collections.Generic.IEnumerable{`0},System.Threading.CancellationToken)">
+            <inheritdoc />
+            <param name="documents"></param>
+            <param name="cancellationToken"></param>
+            <exception cref="T:Microsoft.Azure.Cosmos.CosmosException"></exception>
+        </member>
+        <member name="T:Cosmos.Entity.Mapper.IQueryExecutor`1">
+            <summary>   
+            <para>
+            <see cref="M:Cosmos.Entity.Mapper.IQueryExecutor`1.ExecuteAsync(System.Threading.Tasks.Task{Microsoft.Azure.Cosmos.ItemResponse{`0}})"/> executes the Cosmos operation and catches any error that may occur and attempts
+            to log it. This is to make sure errors from cosmos related operations are captured
+            </para>
+            </summary>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.IQueryExecutor`1.ExecuteAsync(System.Threading.Tasks.Task{Microsoft.Azure.Cosmos.ItemResponse{`0}})">
+            <summary>
+            Executes an operation that expects a <see cref="T:Microsoft.Azure.Cosmos.ItemResponse`1"/>
+            </summary>
+            <param name="operation"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.IQueryExecutor`1.ExecuteAsync(System.Threading.Tasks.Task{Microsoft.Azure.Cosmos.FeedResponse{`0}})">
+            <summary>
+            Executes a task that returns a <see cref="T:Microsoft.Azure.Cosmos.FeedResponse`1"/>
+            </summary>
+            <param name="operation"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.IQueryExecutor`1.ExecuteAsync(System.Threading.Tasks.Task{Microsoft.Azure.Cosmos.ResponseMessage})">
+            <summary>
+            Executes a task that returns a <see cref="T:Microsoft.Azure.Cosmos.ResponseMessage"/>
+            </summary>
+            <param name="operation"></param>
+            <returns>The result of <paramref name="operation"/></returns>
+        </member>
+        <member name="T:Cosmos.Entity.Mapper.IQueryMaterializable`1">
+            <summary>
+            Cosmos SDK <see cref="M:Microsoft.Azure.Cosmos.Container.GetItemLinqQueryable``1(System.Boolean,System.String,Microsoft.Azure.Cosmos.QueryRequestOptions,Microsoft.Azure.Cosmos.CosmosLinqSerializerOptions)"/> returns an <see cref="T:System.Linq.IQueryable`1"/>
+            with no result set. The queryable needs to be converted to a Feed Iterator to traverse through the results as they come through in batches. Callers are able to 
+            call Queryable extensions on the queryable returned but in a typical enterprise system where EF.Core is in place, there could be a clash as there is an alternative EF Core
+            Cosmos Db provider. To avoid this, the collection APIs will return <see cref="T:Cosmos.Entity.Mapper.IQueryMaterializable`1"/> which will contain methods similar to EFCore extensions that can be
+            used to actualize the result set
+            </summary>
+            <typeparam name="TDocument"></typeparam>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.IQueryMaterializable`1.ToFeedIterator">
+            <summary>
+            Converts the queryable to a Feed Iterator that can be used by the Cosmos Db SDK
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.IQueryMaterializable`1.AsEnumerableAsync(System.Threading.CancellationToken)">
+            <summary>
+            Actualizes the <see cref="T:System.Linq.IQueryable`1"/> to an enumerable and returns a list 
+            of <typeparamref name="TDocument"/>
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.IQueryMaterializable`1.ToListAsync(System.Threading.CancellationToken)">
+            <summary>
+            Materializes the <see cref="T:Cosmos.Entity.Mapper.IQueryExecutor`1"/> to a list
+            </summary>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.IQueryMaterializable`1.FirstOrDefaultAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
+            <summary>
+            Uses the feed iterator to get the first element in the sequence. Returns null if no item
+            is in the sequence
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.IQueryMaterializable`1.SingleOrDefaultAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
+            <summary>
+            Like <see cref="M:Cosmos.Entity.Mapper.IQueryMaterializable`1.FirstOrDefaultAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)"/>, this also returns the first element in the sequence or null if no item is in the sequence
+            <para>However, will throw <see cref="T:System.InvalidOperationException"/> if there are more than one item in the sequence</para>
+            </summary>
+            <param name="cancellationToken"></param>
+            <param name="predicate"></param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.IQueryMaterializable`1.FirstAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
+            <summary>
+            Like <see cref="M:Cosmos.Entity.Mapper.IQueryMaterializable`1.FirstOrDefaultAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)"/>, this returns the first element in the sequence. However it throws a
+            <see cref="T:System.InvalidOperationException"/> exception if no item is in the sequence
+            </summary>
+            <param name="predicate"></param>
+            <param name="cancellationToken"></param>
+            <exception cref="T:System.InvalidOperationException"></exception>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.IQueryMaterializable`1.SingleAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
+            <summary>
+            Like <see cref="M:Cosmos.Entity.Mapper.IQueryMaterializable`1.FirstAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)"/>, <see cref="M:Cosmos.Entity.Mapper.IQueryMaterializable`1.SingleAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)"/> returns the first element in a sequence but throws an <see cref="T:System.InvalidOperationException"/> exception
+            if there are no element or if there more than one item in the sequence
+            </summary>
+            <param name="cancellationToken"></param>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.IQueryMaterializable`1.CountAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously gets the count of item in a sequence.
+            </summary>
+            <remarks>
+            <para>
+            Like all the other query actualization method, it relies on the <see cref="T:Microsoft.Azure.Cosmos.FeedIterator"/>
+            </para>
+            </remarks>
+            <param name="predicate"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.IQueryMaterializable`1.AnyAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
+            <summary>
+            Checks if any document is in the sequence.
+            </summary>
+            <param name="predicate"></param>
+            <param name="cancellationToken"></param>
+            <returns>Returns true if there is at least one document in the sequence. Returns false otherwise</returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.IQueryMaterializable`1.AllAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
+            <summary>
+            Checks if all documents in the sequence passes the test in the specified <paramref name="predicate"/>
+            </summary>
+            <param name="predicate"></param>
+            <param name="cancellationToken"></param>
+            <returns>
+            <para>A task representing the asynchronous result. Would return <see langword="true"/> if every document in the sequence matches the predicate</para>
+            </returns>
+        </member>
+        <member name="T:Cosmos.Entity.Mapper.QueryExecutor`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.QueryExecutor`1.#ctor">
+            <summary>
+            Creates instance of the operation executor
+            </summary>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.QueryExecutor`1.ExecuteAsync(System.Threading.Tasks.Task{Microsoft.Azure.Cosmos.ItemResponse{`0}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.QueryExecutor`1.ExecuteAsync(System.Threading.Tasks.Task{Microsoft.Azure.Cosmos.FeedResponse{`0}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.QueryExecutor`1.ExecuteAsync(System.Threading.Tasks.Task{Microsoft.Azure.Cosmos.ResponseMessage})">
+            <inheritdoc />
+            <exception cref="T:Microsoft.Azure.Cosmos.CosmosException"></exception>
+        </member>
+        <member name="T:Cosmos.Entity.Mapper.QueryMaterializer`1">
+            <summary>
+            Cosmos SDK <see cref="M:Microsoft.Azure.Cosmos.Container.GetItemLinqQueryable``1(System.Boolean,System.String,Microsoft.Azure.Cosmos.QueryRequestOptions,Microsoft.Azure.Cosmos.CosmosLinqSerializerOptions)"/> returns an <see cref="T:System.Linq.IQueryable`1"/>
+            with no result set. The queryable needs to be converted to a Feed Iterator to traverse through the results as they come through in batches. Callers are able to 
+            call Queryable extensions on the queryable returned but in a typical enterprise system where EF.Core is in place, there could be a clash as there is an alternative EF Core
+            Cosmos Db provider. To avoid this, the collection APIs will return <see cref="T:Cosmos.Entity.Mapper.IQueryMaterializable`1"/> which will contain methods similar to EFCore extensions that can be
+            used to actualize the result set
+            </summary>
+            <typeparam name="TDocument"></typeparam>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.QueryMaterializer`1.#ctor(System.Linq.IQueryable{`0},Cosmos.Entity.Mapper.IQueryExecutor{`0})">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.QueryMaterializer`1.AsEnumerableAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.QueryMaterializer`1.FirstOrDefaultAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.QueryMaterializer`1.SingleOrDefaultAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.QueryMaterializer`1.FirstAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.QueryMaterializer`1.SingleAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.QueryMaterializer`1.CountAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.QueryMaterializer`1.ToFeedIterator">
+            <inheritdoc/>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.QueryMaterializer`1.ToListAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.QueryMaterializer`1.AnyAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.QueryMaterializer`1.AllAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)">
+            <inheritdoc />
+            <remarks>
+            <para><see cref="M:Cosmos.Entity.Mapper.QueryMaterializer`1.AllAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Threading.CancellationToken)"/> have not been publicly released. Internal implementation have not been fully tested and should
+            not be used in a production environment. Updates can be made to the method without public acknowledgement</para>
+            </remarks>
+        </member>
+        <member name="T:Cosmos.Entity.Mapper.Schema.CollectionAttribute">
+            <summary>
+            Configurable attributes to enable the mapping of an entity 
+            to a specific collection
+            </summary>
+        </member>
+        <member name="P:Cosmos.Entity.Mapper.Schema.CollectionAttribute.Name">
+            <summary>
+             The name of the collection
+            </summary>
+            <remarks>
+            <para>Cosmos Db refers to this as a container Id</para>
+            </remarks>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Schema.CollectionAttribute.#ctor(System.String)">
+            <summary>
+            Sets the target collection name
+            </summary>
+            <param name="collectionName"></param>
+        </member>
+        <member name="T:Cosmos.Entity.Mapper.Schema.DatabaseAttribute">
+            <summary>
+            Define database attributes
+            </summary>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Schema.DatabaseAttribute.#ctor(System.String)">
+            <summary>
+            Configure the database with its name
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="T:Cosmos.Entity.Mapper.Schema.DocumentKeyAttribute">
+            <summary>
+            The <see cref="T:Cosmos.Entity.Mapper.Schema.DocumentKeyAttribute"/> is used to denote the id column of a document or entity
+            This will make the document a unique entity within its partition
+            </summary>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Schema.DocumentKeyAttribute.#ctor">
+            <summary>
+            Parameterless key
+            </summary>
+        </member>
+        <member name="T:Cosmos.Entity.Mapper.Schema.DocumentPartitionAttribute">
+            <summary>
+            <see cref="T:Cosmos.Entity.Mapper.Schema.DocumentPartitionAttribute"/> describes the partition key of a document.    
+            </summary>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Schema.DocumentPartitionAttribute.#ctor">
+            <summary>
+            Parameterless attribute
+            </summary>
+        </member>
+        <member name="T:Cosmos.Entity.Mapper.Schema.ISchemaDefinitionReader`1">
+            <summary>
+            Contracts for attributes on a document
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Schema.ISchemaDefinitionReader`1.ReadAttributeValue``1(`0)">
+            <summary>
+            Reads the value of the first property within the <paramref name="instance"/> argument that matches
+            <typeparamref name="TAttribute"/>
+            </summary>
+            <typeparam name="TAttribute"></typeparam>
+            <param name="instance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Schema.ISchemaDefinitionReader`1.AttributeIsDefinedOnEntity``1">
+            <summary>
+            Checks if <typeparamref name="TAttribute"/> is defined on <typeparamref name="TEntity"/>
+            </summary>
+            <typeparam name="TAttribute">The attribute to check for</typeparam>
+            <returns>True if the attribute is defined</returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Schema.ISchemaDefinitionReader`1.GetEntityNameByAttribute``1(`0)">
+            <summary>
+            Finds the first first occurence <typeparamref name="TAttribute"/> on an entity where an entity
+            could be a type, a property or any struct and returns the name of the property
+            </summary>
+            <typeparam name="TAttribute"></typeparam>
+            <param name="instance"></param>
+            <returns>The string interpretation of the entity name</returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Schema.ISchemaDefinitionReader`1.GetAttributeInstanceFromType``1">
+            <summary>
+            Gets instance of an attribute defined on the entity
+            </summary>
+            <typeparam name="TAttribute"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:Cosmos.Entity.Mapper.Schema.SchemaDefinitionReader`1">
+            <summary>
+            Reads the configuration and metadata definition on a collection
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Schema.SchemaDefinitionReader`1.GetInstanceFromType(System.Type)">
+            <summary>
+            Returns an instance of <see cref="T:Cosmos.Entity.Mapper.Schema.SchemaDefinitionReader`1"/> using the type
+            </summary>
+            <remarks>
+            <para>Ideal when the type if generated dynamically</para>
+            </remarks>
+            <param name="type"></param>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Schema.SchemaDefinitionReader`1.GetInstanceFromType``1(``0)">
+            <summary>
+            Returns an instance of <see cref="T:Cosmos.Entity.Mapper.Schema.SchemaDefinitionReader`1"/>
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Schema.SchemaDefinitionReader`1.AttributeIsDefinedOnEntity``1">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Schema.SchemaDefinitionReader`1.GetEntityNameByAttribute``1(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Schema.SchemaDefinitionReader`1.GetAttributeInstanceFromType``1">
+            <inheritdoc />
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Schema.SchemaDefinitionReader`1.ReadAttributeValue``1(`0)">
+            <inheritdoc />
+        </member>
+        <member name="T:Cosmos.Entity.Mapper.Utilities.EntityValidationBase">
+            <summary>
+            This is an internal implementation and not designed to be publicly used. Changes can be made without a public notice
+            Use is a production environment may lead to unpredictable issues
+            </summary>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Utilities.EntityValidationBase.NotNullOrThrow``1(``0)">
+            <summary>
+            Checks if an entity is null.
+            </summary>
+            <remarks>
+            <para>Method explictly checks for null. A whitespace and empty string would not pass through as they are not null</para>
+            </remarks>
+            <typeparam name="TEntity"></typeparam>
+            <param name="entity"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Utilities.EntityValidationBase.MustBeTrueOrThrow``1(``0)">
+            <summary>
+            Checks if an entity evaluates to true
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <param name="entity"></param>
+            <remarks>
+            <para>Uses the <paramref name="entity"/> default <see cref="M:System.IConvertible.ToBoolean(System.IFormatProvider)"/> to check if an object evaluates to true</para>
+            </remarks>
+            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:System.InvalidCastException"></exception>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Utilities.EntityValidationBase.NotEmptyOrThrow``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Evaluates <paramref name="entities"/> and throws and exception if param is null 
+            of or is empty
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <param name="entities"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:System.ArgumentNullException">Throws if <paramref name="entities"/> is null</exception>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Utilities.EntityValidationBase.HasNoNullEntityOrThrow``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Evaluates if an enumerable has a null entity. 
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <param name="entities"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:System.ArgumentNullException">Throws when <paramref name="entities"/> is null</exception>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Utilities.EntityValidationBase.HasNoDocumentWithNullableIdOrThrow``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Evaluates that all documents in <paramref name="documents"/> has a value in the Id value else throws an exception
+            </summary>
+            <typeparam name="TDocument"></typeparam>
+            <param name="documents"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="T:Cosmos.Entity.Mapper.Validations.SchemaValidationBase`1">
+            <summary>
+            Base class for classes performing schema validations
+            </summary>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Validations.SchemaValidationBase`1.MustHaveKeyDefinitionOrThrow">
+            <summary>
+            Checks if <typeparamref name="TDocument"/> has a specified <see cref="T:Cosmos.Entity.Mapper.Schema.DocumentKeyAttribute"/> attribute
+            </summary>
+            <exception cref="T:System.ArgumentException">Throws when entity does not have a key configuration</exception>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Validations.SchemaValidationBase`1.MustHavePartitionDefinitionOrThrow">
+            <summary>
+            Checks if <typeparamref name="TDocument"/> has a required <see cref="T:Cosmos.Entity.Mapper.Schema.DocumentPartitionAttribute"/> attribute
+            </summary>
+            <returns></returns>
+            <exception cref="T:System.InvalidOperationException">Throws when entity does not have a partition key schema definition</exception>
+        </member>
+        <member name="M:Cosmos.Entity.Mapper.Validations.SchemaValidationBase`1.MustHaveMinumumSchemaDefinitionOrThrow">
+            <exception cref="T:System.InvalidOperationException">Throws when entity does not have a partition key schema definition</exception>
+            <exception cref="T:System.ArgumentException">Throws when entity does not have a key configuration</exception>
+            <remarks>
+            <para>Checks if <typeparamref name="TDocument"/> has a specified <see cref="T:Cosmos.Entity.Mapper.Schema.DocumentKeyAttribute"/> attribute</para>
+            <para>Checks if <typeparamref name="TDocument"/> has a required <see cref="T:Cosmos.Entity.Mapper.Schema.DocumentPartitionAttribute"/> attribute</para>
+            </remarks>
+        </member>
+    </members>
+</doc>

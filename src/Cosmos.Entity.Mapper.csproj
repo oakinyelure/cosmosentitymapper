@@ -1,0 +1,65 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <MinVerTagPrefix>v</MinVerTagPrefix>
+    <Version>0.1.0-beta</Version>
+    <Features>strict</Features>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Description>A simple entity wrapper for Microsoft's cosmos database. Allows ease of use by exposing collections through a unit of work and repository pattern</Description>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>oakinyelure; Microsoft Cosmos Db, NoSQL, ORM, NOSQL ORM</PackageTags>
+    <RepositoryUrl></RepositoryUrl>
+    <ProductName>Cosmos.Entity.Mapper</ProductName>
+    <Product>Cosmos.Entity.Mapper</Product>
+    <Authors>oakinyelure</Authors>
+    <Owner>Olusegun Akinyelure</Owner>
+    <Title>Cosmos.Entity.Mapper</Title>
+    <PackageId>Cosmos.Entity.Mapper</PackageId>
+    <Copyright>oakinyelure $([System.DateTime]::UtcNow.Year)</Copyright>
+    <PackageOutputPath>NugetOutput</PackageOutputPath>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <DocumentationFile>$(MSBuildProjectDirectory)\$(AssemblyName).xml</DocumentationFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <LangVersion>11.0</LangVersion>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NoWarn>$(NoWarn);CS1701;CS1702</NoWarn>
+    <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.36.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="README.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="License">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
