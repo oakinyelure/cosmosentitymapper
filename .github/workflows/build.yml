@@ -32,5 +32,5 @@ jobs:
       - name: Upload Package
         uses: actions/upload-artifact@v3
         with:
-          name: artifact-${{ github.run_number }}
+          name: artifact
           path: "src/NugetOutput/**/*.nupkg"
