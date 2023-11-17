@@ -20,7 +20,7 @@ jobs:
       - name: Download package
         uses: actions/download-artifact@v2
         with:
-          name: my-package-${{ github.run_number }}
+          name: artifact-${{ github.run_number }}
 
       - name: Deploy to NuGet
         run: dotnet nuget push src/NugetOutput/**/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.COSMOS_ENTITY_MAPPER_SECRET }}
