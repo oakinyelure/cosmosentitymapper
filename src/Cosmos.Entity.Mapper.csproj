@@ -9,7 +9,7 @@
     <Description>A simple entity wrapper for Microsoft's cosmos database. Allows ease of use by exposing collections through a unit of work and repository pattern</Description>
     <RepositoryType>git</RepositoryType>
     <PackageTags>oakinyelure; Microsoft Cosmos Db, NoSQL, ORM, NOSQL ORM</PackageTags>
-    <RepositoryUrl></RepositoryUrl>
+    <RepositoryUrl>https://github.com/oakinyelure/cosmosentitymapper</RepositoryUrl>
     <ProductName>Cosmos.Entity.Mapper</ProductName>
     <Product>Cosmos.Entity.Mapper</Product>
     <Authors>oakinyelure</Authors>
