@@ -364,6 +364,18 @@
             </remarks>
             <returns></returns>
         </member>
+        <member name="M:Cosmos.Entity.Mapper.Extensions.QueryableExtensions.OrderByDynamicProperty``1(System.Linq.IQueryable{``0},System.String,System.Nullable{System.ComponentModel.ListSortDirection})">
+            <summary>
+            Performs a dynamic order by on <paramref name="property"/> using <paramref name="direction"/> to determine the sort order
+            </summary>
+            <typeparam name="TDocument"></typeparam>
+            <param name="source"></param>
+            <param name="property"></param>
+            <param name="direction"></param>
+            <returns></returns>
+            <exception cref="T:System.InvalidOperationException"></exception>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
         <member name="T:Cosmos.Entity.Mapper.Extensions.TaskExtensions">
             <summary>
             This is an internal API that supports the Cosmos Entity Mapper core infrastructure and not subject to the same compatibility
