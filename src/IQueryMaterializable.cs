@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -26,12 +27,12 @@ namespace Cosmos.Entity.Mapper
         public abstract FeedIterator<TDocument> ToFeedIterator();
 
         /// <summary>
-        /// Actualizes the <see cref="IQueryable{T}"/> to an enumerable and returns a list 
+        /// Provides a non-thread-blocking interface to materialize the queryable
         /// of <typeparamref name="TDocument"/>
         /// </summary>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public abstract Task<IEnumerable<TDocument>> AsEnumerableAsync(CancellationToken cancellationToken = default);
+        public abstract IAsyncEnumerable<TDocument> AsEnumerableAsync(CancellationToken cancellationToken);
 
         /// <summary>
         /// Materializes the <see cref="IQueryExecutor{TDocument}"/> to a list

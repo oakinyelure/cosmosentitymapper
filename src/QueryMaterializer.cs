@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -34,20 +35,18 @@ namespace Cosmos.Entity.Mapper
         }
 
         /// <inheritdoc />
-        public async virtual Task<IEnumerable<TDocument>> AsEnumerableAsync(CancellationToken cancellationToken = default)
+        public async IAsyncEnumerable<TDocument> AsEnumerableAsync([EnumeratorCancellation] CancellationToken cancellationToken = default)
         {
-            IEnumerable<TDocument> results = Enumerable.Empty<TDocument>();
             using var iterator = ToFeedIterator();
-            while(iterator.HasMoreResults)
+            while (iterator.HasMoreResults)
             {
                 var collection = await _executor.ExecuteAsync(iterator.ReadNextAsync(cancellationToken));
                 if (collection is null) continue;
-                foreach(var item in collection)
+                foreach (var item in collection)
                 {
-                    results = results.Append(item);
+                    yield return item;
                 }
             }
-            return results;
         }
 
         /// <inheritdoc />
@@ -58,7 +57,7 @@ namespace Cosmos.Entity.Mapper
                 _queryable = _queryable.Where(predicate);
             }
             _queryable = _queryable.Take(1);
-            var resultSet = await AsEnumerableAsync(cancellationToken);
+            var resultSet = await ToListAsync(cancellationToken);
             return resultSet.FirstOrDefault();
         }
 
@@ -70,7 +69,7 @@ namespace Cosmos.Entity.Mapper
                 _queryable = _queryable.Where(predicate);
             }
             _queryable = _queryable.Take(2);
-            var resultSet = await AsEnumerableAsync(cancellationToken);
+            var resultSet = await ToListAsync(cancellationToken);
             if (resultSet.Count() > 1) throw new InvalidOperationException("Materialized result contains more than one document");
             return resultSet.FirstOrDefault();
         }
@@ -83,7 +82,7 @@ namespace Cosmos.Entity.Mapper
                 _queryable = _queryable.Where(predicate);
             }
             _queryable = _queryable.Take(1);
-            var resultSet = await AsEnumerableAsync(cancellationToken);
+            var resultSet = await ToListAsync(cancellationToken);
             if (resultSet.Count() == 0) throw new InvalidOperationException("No item found in the sequence");
             return resultSet.FirstOrDefault();
         }
@@ -96,7 +95,7 @@ namespace Cosmos.Entity.Mapper
                 _queryable = _queryable.Where(predicate);
             }
             _queryable = _queryable.Take(2);
-            var resultSet = await AsEnumerableAsync(cancellationToken);
+            var resultSet = await ToListAsync(cancellationToken);
             if (resultSet.Count() > 1) throw new InvalidOperationException("Materialized result contains more than one document");
             if (!resultSet.Any()) throw new InvalidOperationException("No item found in the sequence");
             return resultSet.FirstOrDefault();
@@ -123,8 +122,12 @@ namespace Cosmos.Entity.Mapper
         /// <inheritdoc />
         public async Task<List<TDocument>> ToListAsync(CancellationToken cancellationToken = default)
         {
-            var documents = await AsEnumerableAsync(cancellationToken);
-            return documents.ToList();
+            List<TDocument> results = new();
+            await foreach (var item in AsEnumerableAsync(cancellationToken))
+            {
+                results.Add(item);
+            }
+            return results;
         }
 
         /// <inheritdoc />
@@ -144,9 +147,8 @@ namespace Cosmos.Entity.Mapper
             EntityValidationBase.NotNullOrThrow(predicate);
             // Negate the predicate to query only documents that does not match. We don't expect a match as every document in the sequence is expected to match
             Expression<Func<TDocument,bool>> invertedPredicate = Expression.Lambda<Func<TDocument,bool>>(Expression.Not(predicate.Body), predicate.Parameters);
-            _queryable = _queryable.Where(invertedPredicate);
-            var hasMatch = await AnyAsync(null, cancellationToken);
-            return !hasMatch;
+            var firstNonMatchingItem = await FirstOrDefaultAsync(invertedPredicate, cancellationToken);
+            return firstNonMatchingItem is null;
         }
     }
 }

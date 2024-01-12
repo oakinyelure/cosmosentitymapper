@@ -26,7 +26,7 @@ namespace Cosmos.Entity.Mapper.Attributes.Tests
         {
             var definitionReader = new SchemaDefinitionReader<SomeEntityWithType>();
             bool actual = definitionReader.AttributeIsDefinedOnEntity<DocumentPartitionAttribute>();
-            Assert.True(actual);
+            Assert.That(actual, Is.True);
         }
 
         [Test()]

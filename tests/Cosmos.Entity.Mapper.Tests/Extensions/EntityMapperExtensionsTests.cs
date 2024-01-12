@@ -11,8 +11,8 @@ namespace Cosmos.Entity.Mapper.Tests
         {
             var stub = Enumerable.Empty<string>().AsQueryable();
             var actual = stub.AsMaterializable();
-            Assert.NotNull(actual);
-            Assert.True(actual is IQueryMaterializable<string>);
+            Assert.That(actual, Is.Not.Null);
+            Assert.That(actual is IQueryMaterializable<string>, Is.True);
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Cosmos.Entity.Mapper.Tests
     {
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public string Name { get; set; }       
     }
 
     [TestFixture()]
@@ -27,7 +27,7 @@ namespace Cosmos.Entity.Mapper.Tests
 
 
         [Test()]
-        public async Task ToEnumerableAsync_Can_Return_An_Enumerable_Of_Entity_When_Queried_Against_A_Queryable()
+        public async Task ToListAsync_Can_Return_A_List_Of_Entities_When_Queried_Against_A_Queryable()
         {
             var stubs = new List<CollectionQueryableStub>
             {
@@ -44,7 +44,7 @@ namespace Cosmos.Entity.Mapper.Tests
 
             var collectionQueryableMock = new Mock<QueryMaterializer<CollectionQueryableStub>>(MockBehavior.Loose, stubs.AsQueryable(), queryExecutor.Object) { CallBase = true };
             collectionQueryableMock.Setup(mock => mock.ToFeedIterator()).Returns(_feedIteratorMock.Object);
-            var actual = await collectionQueryableMock.Object.AsEnumerableAsync();
+            var actual = await collectionQueryableMock.Object.ToListAsync();
             Assert.That(actual, Is.Not.Empty);
             Assert.That(actual.Count(), Is.EqualTo(stubs.Count()));
         }
@@ -59,13 +59,15 @@ namespace Cosmos.Entity.Mapper.Tests
                 new CollectionQueryableStub { Id = 2, Name = "2" },
                 new CollectionQueryableStub { Id = 3, Name = "3" },
                 new CollectionQueryableStub { Id = 4, Name = "4" },
-            }.AsEnumerable();
+            }.ToList();
 
             var queryExecutor = new Mock<IQueryExecutor<CollectionQueryableStub>>();
             var queryableMock = new Mock<IQueryable<CollectionQueryableStub>>();
+            ConfigureFeedIterator(stubs);
+            queryExecutor.Setup(mock => mock.ExecuteAsync(It.IsAny<Task<FeedResponse<CollectionQueryableStub>>>())).ReturnsAsync(_feedResponseMock.Object);
 
             var collectionQueryableMock = new Mock<QueryMaterializer<CollectionQueryableStub>>(MockBehavior.Loose, stubs.AsQueryable(), queryExecutor.Object) { CallBase = true };
-            collectionQueryableMock.Setup(mock => mock.AsEnumerableAsync(It.IsAny<CancellationToken>())).ReturnsAsync(stubs);
+            collectionQueryableMock.Setup(mock => mock.ToFeedIterator()).Returns(_feedIteratorMock.Object);
             var actual = await collectionQueryableMock.Object.FirstOrDefaultAsync();
             Assert.That(actual, Is.Not.Null);
         }
@@ -73,13 +75,15 @@ namespace Cosmos.Entity.Mapper.Tests
         [Test()]
         public async Task FirstOrDefaultAsync_Returns_Null_When_No_Item_Is_In_The_Sequence()
         {
-            var stubs = Enumerable.Empty<CollectionQueryableStub>();
+            var stubs = new List<CollectionQueryableStub>();
 
             var queryExecutor = new Mock<IQueryExecutor<CollectionQueryableStub>>();
             var queryableMock = new Mock<IQueryable<CollectionQueryableStub>>();
+            ConfigureFeedIterator(stubs);
+            queryExecutor.Setup(mock => mock.ExecuteAsync(It.IsAny<Task<FeedResponse<CollectionQueryableStub>>>())).ReturnsAsync(_feedResponseMock.Object);
 
             var collectionQueryableMock = new Mock<QueryMaterializer<CollectionQueryableStub>>(MockBehavior.Loose, stubs.AsQueryable(), queryExecutor.Object) { CallBase = true };
-            collectionQueryableMock.Setup(mock => mock.AsEnumerableAsync(It.IsAny<CancellationToken>())).ReturnsAsync(stubs);
+            collectionQueryableMock.Setup(mock => mock.ToFeedIterator()).Returns(_feedIteratorMock.Object);;
             var actual = await collectionQueryableMock.Object.FirstOrDefaultAsync();
             Assert.That(actual, Is.Null);
         }
@@ -94,9 +98,11 @@ namespace Cosmos.Entity.Mapper.Tests
 
             var queryExecutor = new Mock<IQueryExecutor<CollectionQueryableStub>>();
             var queryableMock = new Mock<IQueryable<CollectionQueryableStub>>();
+            ConfigureFeedIterator(stubs);
+            queryExecutor.Setup(mock => mock.ExecuteAsync(It.IsAny<Task<FeedResponse<CollectionQueryableStub>>>())).ReturnsAsync(_feedResponseMock.Object);
 
             var collectionQueryableMock = new Mock<QueryMaterializer<CollectionQueryableStub>>(MockBehavior.Loose, stubs.AsQueryable(), queryExecutor.Object) { CallBase = true };
-            collectionQueryableMock.Setup(mock => mock.AsEnumerableAsync(It.IsAny<CancellationToken>())).ReturnsAsync(stubs);
+            collectionQueryableMock.Setup(mock => mock.ToFeedIterator()).Returns(_feedIteratorMock.Object);
             var actual = await collectionQueryableMock.Object.SingleOrDefaultAsync();
             Assert.That(actual, Is.Not.Null);
             Assert.That(actual, Is.EqualTo(stubs.ElementAt(0)));
@@ -106,13 +112,15 @@ namespace Cosmos.Entity.Mapper.Tests
         [Test()]
         public async Task SingleOrDefaultAsync_Can_Return_Null_From_Queryable_When_Sequence_Contains_No_Documents()
         {
-            var stubs = Enumerable.Empty<CollectionQueryableStub>();
+            var stubs = new List<CollectionQueryableStub>();
 
             var queryExecutor = new Mock<IQueryExecutor<CollectionQueryableStub>>();
             var queryableMock = new Mock<IQueryable<CollectionQueryableStub>>();
+            ConfigureFeedIterator(stubs);
+            queryExecutor.Setup(mock => mock.ExecuteAsync(It.IsAny<Task<FeedResponse<CollectionQueryableStub>>>())).ReturnsAsync(_feedResponseMock.Object);
 
             var collectionQueryableMock = new Mock<QueryMaterializer<CollectionQueryableStub>>(MockBehavior.Loose, stubs.AsQueryable(), queryExecutor.Object) { CallBase = true };
-            collectionQueryableMock.Setup(mock => mock.AsEnumerableAsync(It.IsAny<CancellationToken>())).ReturnsAsync(stubs);
+            collectionQueryableMock.Setup(mock => mock.ToFeedIterator()).Returns(_feedIteratorMock.Object);
             var actual = await collectionQueryableMock.Object.SingleOrDefaultAsync();
             Assert.That(actual, Is.Null);
         }
@@ -126,9 +134,11 @@ namespace Cosmos.Entity.Mapper.Tests
 
             var queryExecutor = new Mock<IQueryExecutor<CollectionQueryableStub>>();
             var queryableMock = new Mock<IQueryable<CollectionQueryableStub>>();
+            ConfigureFeedIterator(stubs);
+            queryExecutor.Setup(mock => mock.ExecuteAsync(It.IsAny<Task<FeedResponse<CollectionQueryableStub>>>())).ReturnsAsync(_feedResponseMock.Object);
 
             var collectionQueryableMock = new Mock<QueryMaterializer<CollectionQueryableStub>>(MockBehavior.Loose, stubs.AsQueryable(), queryExecutor.Object) { CallBase = true };
-            collectionQueryableMock.Setup(mock => mock.AsEnumerableAsync(It.IsAny<CancellationToken>())).ReturnsAsync(stubs);
+            collectionQueryableMock.Setup(mock => mock.ToFeedIterator()).Returns(_feedIteratorMock.Object);
             Assert.ThrowsAsync<InvalidOperationException>(() => collectionQueryableMock.Object.SingleOrDefaultAsync());
         }
 
@@ -141,9 +151,12 @@ namespace Cosmos.Entity.Mapper.Tests
 
             var queryExecutor = new Mock<IQueryExecutor<CollectionQueryableStub>>();
             var queryableMock = new Mock<IQueryable<CollectionQueryableStub>>();
+            ConfigureFeedIterator(stubs);
+            queryExecutor.Setup(mock => mock.ExecuteAsync(It.IsAny<Task<FeedResponse<CollectionQueryableStub>>>())).ReturnsAsync(_feedResponseMock.Object);
 
             var collectionQueryableMock = new Mock<QueryMaterializer<CollectionQueryableStub>>(MockBehavior.Loose, stubs.AsQueryable(), queryExecutor.Object) { CallBase = true };
-            collectionQueryableMock.Setup(mock => mock.AsEnumerableAsync(It.IsAny<CancellationToken>())).ReturnsAsync(stubs);
+            collectionQueryableMock.Setup(mock => mock.ToFeedIterator()).Returns(_feedIteratorMock.Object);
+
             var actual = await collectionQueryableMock.Object.FirstAsync();
             Assert.That(actual, Is.Not.Null);
             Assert.That(actual, Is.EqualTo(stubs.ElementAt(0)));
@@ -158,9 +171,11 @@ namespace Cosmos.Entity.Mapper.Tests
 
             var queryExecutor = new Mock<IQueryExecutor<CollectionQueryableStub>>();
             var queryableMock = new Mock<IQueryable<CollectionQueryableStub>>();
+            ConfigureFeedIterator(stubs);
+            queryExecutor.Setup(mock => mock.ExecuteAsync(It.IsAny<Task<FeedResponse<CollectionQueryableStub>>>())).ReturnsAsync(_feedResponseMock.Object);
 
             var collectionQueryableMock = new Mock<QueryMaterializer<CollectionQueryableStub>>(MockBehavior.Loose, stubs.AsQueryable(), queryExecutor.Object) { CallBase = true };
-            collectionQueryableMock.Setup(mock => mock.AsEnumerableAsync(It.IsAny<CancellationToken>())).ReturnsAsync(stubs);
+            collectionQueryableMock.Setup(mock => mock.ToFeedIterator()).Returns(_feedIteratorMock.Object);
             Assert.ThrowsAsync<InvalidOperationException>(() => collectionQueryableMock.Object.FirstAsync());
         }
 
@@ -173,9 +188,12 @@ namespace Cosmos.Entity.Mapper.Tests
 
             var queryExecutor = new Mock<IQueryExecutor<CollectionQueryableStub>>();
             var queryableMock = new Mock<IQueryable<CollectionQueryableStub>>();
+            ConfigureFeedIterator(stubs);
+            queryExecutor.Setup(mock => mock.ExecuteAsync(It.IsAny<Task<FeedResponse<CollectionQueryableStub>>>())).ReturnsAsync(_feedResponseMock.Object);
 
             var collectionQueryableMock = new Mock<QueryMaterializer<CollectionQueryableStub>>(MockBehavior.Loose, stubs.AsQueryable(), queryExecutor.Object) { CallBase = true };
-            collectionQueryableMock.Setup(mock => mock.AsEnumerableAsync(It.IsAny<CancellationToken>())).ReturnsAsync(stubs);
+            collectionQueryableMock.Setup(mock => mock.ToFeedIterator()).Returns(_feedIteratorMock.Object);
+
             var actual = await collectionQueryableMock.Object.SingleAsync();
             Assert.That(actual, Is.Not.Null);
             Assert.That(actual, Is.EqualTo(stubs.ElementAt(0)));
@@ -190,9 +208,12 @@ namespace Cosmos.Entity.Mapper.Tests
 
             var queryExecutor = new Mock<IQueryExecutor<CollectionQueryableStub>>();
             var queryableMock = new Mock<IQueryable<CollectionQueryableStub>>();
+            ConfigureFeedIterator(stubs);
+            queryExecutor.Setup(mock => mock.ExecuteAsync(It.IsAny<Task<FeedResponse<CollectionQueryableStub>>>())).ReturnsAsync(_feedResponseMock.Object);
 
             var collectionQueryableMock = new Mock<QueryMaterializer<CollectionQueryableStub>>(MockBehavior.Loose, stubs.AsQueryable(), queryExecutor.Object) { CallBase = true };
-            collectionQueryableMock.Setup(mock => mock.AsEnumerableAsync(It.IsAny<CancellationToken>())).ReturnsAsync(stubs);
+            collectionQueryableMock.Setup(mock => mock.ToFeedIterator()).Returns(_feedIteratorMock.Object);
+
             Assert.ThrowsAsync<InvalidOperationException>(() => collectionQueryableMock.Object.SingleAsync());
         }
 
@@ -205,9 +226,12 @@ namespace Cosmos.Entity.Mapper.Tests
 
             var queryExecutor = new Mock<IQueryExecutor<CollectionQueryableStub>>();
             var queryableMock = new Mock<IQueryable<CollectionQueryableStub>>();
+            ConfigureFeedIterator(stubs);
+            queryExecutor.Setup(mock => mock.ExecuteAsync(It.IsAny<Task<FeedResponse<CollectionQueryableStub>>>())).ReturnsAsync(_feedResponseMock.Object);
 
             var collectionQueryableMock = new Mock<QueryMaterializer<CollectionQueryableStub>>(MockBehavior.Loose, stubs.AsQueryable(), queryExecutor.Object) { CallBase = true };
-            collectionQueryableMock.Setup(mock => mock.AsEnumerableAsync(It.IsAny<CancellationToken>())).ReturnsAsync(stubs);
+            collectionQueryableMock.Setup(mock => mock.ToFeedIterator()).Returns(_feedIteratorMock.Object);
+            
             Assert.ThrowsAsync<InvalidOperationException>(() => collectionQueryableMock.Object.SingleAsync());
         }
 
@@ -235,10 +259,13 @@ namespace Cosmos.Entity.Mapper.Tests
 
             var queryExecutor = new Mock<IQueryExecutor<CollectionQueryableStub>>();
             var queryableMock = new Mock<IQueryable<CollectionQueryableStub>>();
+            ConfigureFeedIterator(stubs);
+            queryExecutor.Setup(mock => mock.ExecuteAsync(It.IsAny<Task<FeedResponse<CollectionQueryableStub>>>())).ReturnsAsync(_feedResponseMock.Object);
 
             var collectionQueryableMock = new Mock<QueryMaterializer<CollectionQueryableStub>>(MockBehavior.Loose, stubs.AsQueryable(), queryExecutor.Object) { CallBase = true };
-            collectionQueryableMock.Setup(mock => mock.AsEnumerableAsync(It.IsAny<CancellationToken>())).ReturnsAsync(stubs);
+            collectionQueryableMock.Setup(mock => mock.ToFeedIterator()).Returns(_feedIteratorMock.Object);
             var actual = await collectionQueryableMock.Object.ToListAsync();
+
             Assert.That(actual, Is.Not.Null);
             Assert.That(actual, Is.Not.Empty);
             Assert.That(actual, Is.InstanceOf<List<CollectionQueryableStub>>());
@@ -254,11 +281,14 @@ namespace Cosmos.Entity.Mapper.Tests
 
             var queryExecutor = new Mock<IQueryExecutor<CollectionQueryableStub>>();
             var queryableMock = new Mock<IQueryable<CollectionQueryableStub>>();
+            ConfigureFeedIterator(stubs);
+            queryExecutor.Setup(mock => mock.ExecuteAsync(It.IsAny<Task<FeedResponse<CollectionQueryableStub>>>())).ReturnsAsync(_feedResponseMock.Object);
 
             var collectionQueryableMock = new Mock<QueryMaterializer<CollectionQueryableStub>>(MockBehavior.Loose, stubs.AsQueryable(), queryExecutor.Object) { CallBase = true };
-            collectionQueryableMock.Setup(mock => mock.AsEnumerableAsync(It.IsAny<CancellationToken>())).ReturnsAsync(stubs);
+            collectionQueryableMock.Setup(mock => mock.ToFeedIterator()).Returns(_feedIteratorMock.Object);
+
             var actual = await collectionQueryableMock.Object.AnyAsync();
-            Assert.True(actual);
+            Assert.That(actual, Is.True);
         }
 
         [Test()]
@@ -270,11 +300,14 @@ namespace Cosmos.Entity.Mapper.Tests
 
             var queryExecutor = new Mock<IQueryExecutor<CollectionQueryableStub>>();
             var queryableMock = new Mock<IQueryable<CollectionQueryableStub>>();
+            ConfigureFeedIterator(stubs);
+            queryExecutor.Setup(mock => mock.ExecuteAsync(It.IsAny<Task<FeedResponse<CollectionQueryableStub>>>())).ReturnsAsync(_feedResponseMock.Object);
 
             var collectionQueryableMock = new Mock<QueryMaterializer<CollectionQueryableStub>>(MockBehavior.Loose, stubs.AsQueryable(), queryExecutor.Object) { CallBase = true };
-            collectionQueryableMock.Setup(mock => mock.AsEnumerableAsync(It.IsAny<CancellationToken>())).ReturnsAsync(stubs);
+            collectionQueryableMock.Setup(mock => mock.ToFeedIterator()).Returns(_feedIteratorMock.Object);
+
             var actual = await collectionQueryableMock.Object.AnyAsync();
-            Assert.False(actual);
+            Assert.That(actual, Is.False);
         }
 
 
@@ -288,12 +321,36 @@ namespace Cosmos.Entity.Mapper.Tests
 
             var queryExecutor = new Mock<IQueryExecutor<CollectionQueryableStub>>();
             var queryableMock = new Mock<IQueryable<CollectionQueryableStub>>();
+            ConfigureFeedIterator(stubs);
+            queryExecutor.Setup(mock => mock.ExecuteAsync(It.IsAny<Task<FeedResponse<CollectionQueryableStub>>>())).ReturnsAsync(_feedResponseMock.Object);
 
             var collectionQueryableMock = new Mock<QueryMaterializer<CollectionQueryableStub>>(MockBehavior.Loose, stubs.AsQueryable(), queryExecutor.Object) { CallBase = true };
-            collectionQueryableMock.Setup(mock => mock.AsEnumerableAsync(It.IsAny<CancellationToken>())).ReturnsAsync(stubs);
+            collectionQueryableMock.Setup(mock => mock.ToFeedIterator()).Returns(_feedIteratorMock.Object);
+
             var actual = await collectionQueryableMock.Object.AnyAsync(e => e.Name != null);
-            Assert.True(actual);
+            Assert.That(actual, Is.True);
         }
+
+        [Test()]
+        public async Task AllAsync_Can_Return_False_When_Any_Item_In_The_Sequence_Does_Not_Pass_The_Predicate_In_The_Argument()
+        {
+            var stubs = new Faker<CollectionQueryableStub>()
+                .RuleFor(e => e.Id, e => e.UniqueIndex)
+                .RuleFor(e => e.Name, e => e.Person.FullName)
+                .GenerateBetween(1, 7);
+
+            var queryExecutor = new Mock<IQueryExecutor<CollectionQueryableStub>>();
+            var queryableMock = new Mock<IQueryable<CollectionQueryableStub>>();
+            ConfigureFeedIterator(stubs);
+            queryExecutor.Setup(mock => mock.ExecuteAsync(It.IsAny<Task<FeedResponse<CollectionQueryableStub>>>())).ReturnsAsync(_feedResponseMock.Object);
+
+            var collectionQueryableMock = new Mock<QueryMaterializer<CollectionQueryableStub>>(MockBehavior.Loose, stubs.AsQueryable(), queryExecutor.Object) { CallBase = true };
+            collectionQueryableMock.Setup(mock => mock.ToFeedIterator()).Returns(_feedIteratorMock.Object);
+
+            var actual = await collectionQueryableMock.Object.AllAsync(e => e.Name == "Should not exist");
+            Assert.That(actual, Is.False);
+        }
+
 
         private FeedIterator<CollectionQueryableStub> ConfigureFeedIterator(IEnumerable<CollectionQueryableStub> entities)
         {

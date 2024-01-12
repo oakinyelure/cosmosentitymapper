@@ -38,7 +38,7 @@ namespace Cosmos.Entity.Mapper.Internal.Tests
 
             var collectionSet = new InternalCollectionSet<TestDocumentStub>(container.Object, new ContextOptions { });
             var actual = await collectionSet.FindAsync("id", "partitionKey", CancellationToken.None);
-            Assert.NotNull(actual);
+            Assert.That(actual, Is.Not.Null);
         }
 
         [Test()]
