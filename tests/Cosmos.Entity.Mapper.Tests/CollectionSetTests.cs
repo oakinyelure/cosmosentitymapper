@@ -24,7 +24,7 @@ namespace Cosmos.Entity.Mapper.Tests
         public void OfType_Can_Project_To_Derived_Object()
         {
             var collectionSet = new InternalCollectionSet<OfTypeBaseTestClass>(new Mock<Container>().Object, new ContextOptions { }).OfType<OfTypeDerivedClass>();
-            Assert.NotNull(collectionSet);
+            Assert.That(collectionSet, Is.Not.Null);
         }
     }
 }

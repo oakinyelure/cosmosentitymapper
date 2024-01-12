@@ -410,10 +410,7 @@
             Provides a facade or an interface to actualize the query.
             </summary>
             <remarks>
-            <para>This was added to ease unit testing. The entity mapper depends on a lot extension methods to materialize queries. This can be
-            difficult to test. The <see cref="T:Cosmos.Entity.Mapper.IQueryMaterializable`1"/> interface provides the same methods thereby enabling developers to mock
-            the behavior of each method. Behind the scene, the methods calls the same extension methods you would otherwise use to materialize the query directly</para>
-            <para>If unit testing is a requirement for your team, this approach is highly recommended</para>
+            <para>This was added to prevent conflict in code base using EFCore because they share a lot of APIs </para>
             </remarks>
             <typeparam name="TDocument"></typeparam>
             <param name="source"></param>
@@ -434,16 +431,6 @@
             </summary>
             <param name="cancellationToken"></param>
             <param name="source"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Cosmos.Entity.Mapper.MaterializationExtensions.ToEnumerableAsync``1(System.Linq.IQueryable{``0},System.Threading.CancellationToken)">
-            <summary>
-            Actualizes the <see cref="T:System.Linq.IQueryable`1"/> to an enumerable and returns a list 
-            of <typeparamref name="TDocument"/>
-            </summary>
-            <typeparam name="TDocument"></typeparam>
-            <param name="source"></param>
-            <param name="cancellationToken"></param>
             <returns></returns>
         </member>
         <member name="M:Cosmos.Entity.Mapper.MaterializationExtensions.FirstOrDefaultAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)">
@@ -655,7 +642,7 @@
         </member>
         <member name="M:Cosmos.Entity.Mapper.IQueryMaterializable`1.AsEnumerableAsync(System.Threading.CancellationToken)">
             <summary>
-            Actualizes the <see cref="T:System.Linq.IQueryable`1"/> to an enumerable and returns a list 
+            Provides a non-thread-blocking interface to materialize the queryable
             of <typeparamref name="TDocument"/>
             </summary>
             <param name="cancellationToken"></param>

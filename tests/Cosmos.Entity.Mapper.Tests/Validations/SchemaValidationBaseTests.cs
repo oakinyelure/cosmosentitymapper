@@ -26,7 +26,7 @@ namespace Cosmos.Entity.Mapper.Validations.Tests
         [Test()]
         public void MustHaveKeyDefinitionOrThrow_Returns_True_If_Document_Has_Key_Attribute()
         {
-            Assert.True(SchemaValidationBase<SchemaValidationBaseTestsStubHasSchema>.MustHaveKeyDefinitionOrThrow());
+            Assert.That(SchemaValidationBase<SchemaValidationBaseTestsStubHasSchema>.MustHaveKeyDefinitionOrThrow(), Is.True);
         }
 
         [Test()]
@@ -38,7 +38,7 @@ namespace Cosmos.Entity.Mapper.Validations.Tests
         [Test()]
         public void MustHavePartitionDefinitionOrThrow_Returns_True_If_Document_Has_Partition_Attribute()
         {
-            Assert.True(SchemaValidationBase<SchemaValidationBaseTestsStubHasSchema>.MustHavePartitionDefinitionOrThrow());
+            Assert.That(SchemaValidationBase<SchemaValidationBaseTestsStubHasSchema>.MustHavePartitionDefinitionOrThrow(), Is.True);
         }
 
 

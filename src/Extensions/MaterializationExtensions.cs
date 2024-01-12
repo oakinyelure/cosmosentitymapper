@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -17,10 +18,7 @@ namespace Cosmos.Entity.Mapper
         /// Provides a facade or an interface to actualize the query.
         /// </summary>
         /// <remarks>
-        /// <para>This was added to ease unit testing. The entity mapper depends on a lot extension methods to materialize queries. This can be
-        /// difficult to test. The <see cref="IQueryMaterializable{TEntity}"/> interface provides the same methods thereby enabling developers to mock
-        /// the behavior of each method. Behind the scene, the methods calls the same extension methods you would otherwise use to materialize the query directly</para>
-        /// <para>If unit testing is a requirement for your team, this approach is highly recommended</para>
+        /// <para>This was added to prevent conflict in code base using EFCore because they share a lot of APIs </para>
         /// </remarks>
         /// <typeparam name="TDocument"></typeparam>
         /// <param name="source"></param>
@@ -37,9 +35,12 @@ namespace Cosmos.Entity.Mapper
         /// <param name="cancellationToken"></param>
         /// <param name="source"></param>
         /// <returns></returns>
-        public static async Task<IEnumerable<TDocument>> AsEnumerableAsync<TDocument>(this IQueryable<TDocument> source, CancellationToken cancellationToken = default)
+        public static async IAsyncEnumerable<TDocument> AsEnumerableAsync<TDocument>(this IQueryable<TDocument> source,[EnumeratorCancellation] CancellationToken cancellationToken = default)
         {
-            return await AsMaterializable(source).AsEnumerableAsync(cancellationToken);
+            await foreach(var item in AsMaterializable(source).AsEnumerableAsync(cancellationToken))
+            {
+                yield return item;
+            }
         }
 
         /// <summary>
@@ -50,17 +51,6 @@ namespace Cosmos.Entity.Mapper
         /// <returns></returns>
         public static async Task<List<TDocument>> ToListAsync<TDocument>(this IQueryable<TDocument> source, CancellationToken cancellationToken = default)
             => await AsMaterializable(source).ToListAsync(cancellationToken);
-
-        /// <summary>
-        /// Actualizes the <see cref="IQueryable{T}"/> to an enumerable and returns a list 
-        /// of <typeparamref name="TDocument"/>
-        /// </summary>
-        /// <typeparam name="TDocument"></typeparam>
-        /// <param name="source"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public static async Task<IEnumerable<TDocument>> ToEnumerableAsync<TDocument>(this IQueryable<TDocument> source, CancellationToken cancellationToken = default)
-            => await source.AsMaterializable().AsEnumerableAsync(cancellationToken);
 
 
         /// <summary>
