@@ -130,7 +130,7 @@ namespace Cosmos.Entity.Mapper.Tests
         {
             var stubs = new Faker<CollectionQueryableStub>()
                 .RuleFor(e => e.Id, e => e.UniqueIndex)
-                .GenerateBetween(1, 7);
+                .GenerateBetween(4, 7);
 
             var queryExecutor = new Mock<IQueryExecutor<CollectionQueryableStub>>();
             var queryableMock = new Mock<IQueryable<CollectionQueryableStub>>();

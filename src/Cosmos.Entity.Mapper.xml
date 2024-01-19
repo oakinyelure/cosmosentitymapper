@@ -416,7 +416,7 @@
             <param name="source"></param>
             <returns></returns>
         </member>
-        <member name="M:Cosmos.Entity.Mapper.MaterializationExtensions.AsEnumerableAsync``1(System.Linq.IQueryable{``0},System.Threading.CancellationToken)">
+        <member name="M:Cosmos.Entity.Mapper.MaterializationExtensions.AsDocumentEnumerableAsync``1(System.Linq.IQueryable{``0},System.Threading.CancellationToken)">
             <summary>
             Actualizes the <see cref="T:System.Linq.IQueryable`1"/> to an enumerable and returns a list 
             of <typeparamref name="TDocument"/>
@@ -425,7 +425,7 @@
             <param name="source"></param>
             <returns></returns>
         </member>
-        <member name="M:Cosmos.Entity.Mapper.MaterializationExtensions.ToListAsync``1(System.Linq.IQueryable{``0},System.Threading.CancellationToken)">
+        <member name="M:Cosmos.Entity.Mapper.MaterializationExtensions.ToDocumentListAsync``1(System.Linq.IQueryable{``0},System.Threading.CancellationToken)">
             <summary>
             Materializes the <see cref="T:Cosmos.Entity.Mapper.IQueryExecutor`1"/> to a list
             </summary>
@@ -433,7 +433,7 @@
             <param name="source"></param>
             <returns></returns>
         </member>
-        <member name="M:Cosmos.Entity.Mapper.MaterializationExtensions.FirstOrDefaultAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)">
+        <member name="M:Cosmos.Entity.Mapper.MaterializationExtensions.FirstOrDefaultDocumentAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)">
             <summary>
             Uses the feed iterator to get the first element in the sequence. Returns null if no item
             is in the sequence
@@ -444,9 +444,9 @@
             <param name="cancellationToken"></param>
             <returns></returns>
         </member>
-        <member name="M:Cosmos.Entity.Mapper.MaterializationExtensions.FirstAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)">
+        <member name="M:Cosmos.Entity.Mapper.MaterializationExtensions.FirstDocumentAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)">
             <summary>
-            Like <see cref="M:Cosmos.Entity.Mapper.MaterializationExtensions.FirstOrDefaultAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)"/>, this returns the first element in the sequence. However it throws a
+            Like <see cref="M:Cosmos.Entity.Mapper.MaterializationExtensions.FirstOrDefaultDocumentAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)"/>, this returns the first element in the sequence. However it throws a
             <see cref="T:System.InvalidOperationException"/> exception if no item is in the sequence
             </summary>
             <param name="predicate"></param>
@@ -455,9 +455,9 @@
             <exception cref="T:System.InvalidOperationException"></exception>
             <returns></returns>
         </member>
-        <member name="M:Cosmos.Entity.Mapper.MaterializationExtensions.SingleAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)">
+        <member name="M:Cosmos.Entity.Mapper.MaterializationExtensions.SingleDocumentAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)">
             <summary>
-            Like <see cref="M:Cosmos.Entity.Mapper.MaterializationExtensions.FirstAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)"/>, <see cref="M:Cosmos.Entity.Mapper.MaterializationExtensions.SingleAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)"/> returns the first element in a sequence but throws an <see cref="T:System.InvalidOperationException"/> exception
+            Like <see cref="M:Cosmos.Entity.Mapper.MaterializationExtensions.FirstDocumentAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)"/>, <see cref="M:Cosmos.Entity.Mapper.MaterializationExtensions.SingleDocumentAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)"/> returns the first element in a sequence but throws an <see cref="T:System.InvalidOperationException"/> exception
             if there are no element or if there more than one item in the sequence
             </summary>
             <param name="cancellationToken"></param>
@@ -465,9 +465,9 @@
             <param name="source"></param>
             <returns></returns>
         </member>
-        <member name="M:Cosmos.Entity.Mapper.MaterializationExtensions.SingleOrDefaultAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)">
+        <member name="M:Cosmos.Entity.Mapper.MaterializationExtensions.SingleOrDefaultDocumentAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)">
             <summary>
-            Like <see cref="M:Cosmos.Entity.Mapper.MaterializationExtensions.FirstOrDefaultAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)"/>, this also returns the first element in the sequence or null if no item is in the sequence
+            Like <see cref="M:Cosmos.Entity.Mapper.MaterializationExtensions.FirstOrDefaultDocumentAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)"/>, this also returns the first element in the sequence or null if no item is in the sequence
             <para>However, will throw <see cref="T:System.InvalidOperationException"/> if there are more than one item in the sequence</para>
             </summary>
             <param name="cancellationToken"></param>
@@ -476,7 +476,7 @@
             <exception cref="T:System.InvalidOperationException"></exception>
             <returns></returns>
         </member>
-        <member name="M:Cosmos.Entity.Mapper.MaterializationExtensions.CountAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)">
+        <member name="M:Cosmos.Entity.Mapper.MaterializationExtensions.DocumentCountAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)">
             <summary>
             Asynchronously gets the count of item in a sequence.
             </summary>
@@ -490,7 +490,7 @@
             <param name="source"></param>
             <returns></returns>
         </member>
-        <member name="M:Cosmos.Entity.Mapper.MaterializationExtensions.AnyAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)">
+        <member name="M:Cosmos.Entity.Mapper.MaterializationExtensions.AnyDocumentAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)">
             <summary>
             Checks if any document is in the sequence.
             </summary>
@@ -499,7 +499,7 @@
             <param name="source"></param>
             <returns>Returns true if there is at least one document in the sequence. Returns false otherwise</returns>
         </member>
-        <member name="M:Cosmos.Entity.Mapper.MaterializationExtensions.AllAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)">
+        <member name="M:Cosmos.Entity.Mapper.MaterializationExtensions.AllDocumentAsync``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Threading.CancellationToken)">
             <summary>
             Checks if all documents in the sequence passes the test in the specified <paramref name="predicate"/>
             </summary>
