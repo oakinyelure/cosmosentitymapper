@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -24,7 +23,7 @@ namespace Cosmos.Entity.Mapper
         /// Converts the queryable to a Feed Iterator that can be used by the Cosmos Db SDK
         /// </summary>
         /// <returns></returns>
-        public abstract FeedIterator<TDocument> ToFeedIterator();
+        FeedIterator<TDocument> ToFeedIterator();
 
         /// <summary>
         /// Provides a non-thread-blocking interface to materialize the queryable
@@ -32,21 +31,21 @@ namespace Cosmos.Entity.Mapper
         /// </summary>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public abstract IAsyncEnumerable<TDocument> AsEnumerableAsync(CancellationToken cancellationToken);
+        IAsyncEnumerable<TDocument> AsEnumerableAsync(CancellationToken cancellationToken);
 
         /// <summary>
         /// Materializes the <see cref="IQueryExecutor{TDocument}"/> to a list
         /// </summary>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public abstract Task<List<TDocument>> ToListAsync(CancellationToken cancellationToken = default);
+        Task<List<TDocument>> ToListAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Uses the feed iterator to get the first element in the sequence. Returns null if no item
         /// is in the sequence
         /// </summary>
         /// <returns></returns>
-        public abstract Task<TDocument> FirstOrDefaultAsync(Expression<Func<TDocument, bool>> predicate = null, CancellationToken cancellationToken = default);
+        Task<TDocument> FirstOrDefaultAsync(Expression<Func<TDocument, bool>> predicate = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Like <see cref="FirstOrDefaultAsync"/>, this also returns the first element in the sequence or null if no item is in the sequence
@@ -56,7 +55,7 @@ namespace Cosmos.Entity.Mapper
         /// <param name="predicate"></param>
         /// <exception cref="InvalidOperationException"></exception>
         /// <returns></returns>
-        public abstract Task<TDocument> SingleOrDefaultAsync(Expression<Func<TDocument, bool>> predicate = null, CancellationToken cancellationToken = default);
+        Task<TDocument> SingleOrDefaultAsync(Expression<Func<TDocument, bool>> predicate = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Like <see cref="FirstOrDefaultAsync"/>, this returns the first element in the sequence. However it throws a
@@ -66,7 +65,7 @@ namespace Cosmos.Entity.Mapper
         /// <param name="cancellationToken"></param>
         /// <exception cref="InvalidOperationException"></exception>
         /// <returns></returns>
-        public abstract Task<TDocument> FirstAsync(Expression<Func<TDocument, bool>> predicate = null, CancellationToken cancellationToken = default);
+        Task<TDocument> FirstAsync(Expression<Func<TDocument, bool>> predicate = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Like <see cref="FirstAsync"/>, <see cref="SingleAsync"/> returns the first element in a sequence but throws an <see cref="InvalidOperationException"/> exception
@@ -75,7 +74,7 @@ namespace Cosmos.Entity.Mapper
         /// <param name="cancellationToken"></param>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        public abstract Task<TDocument> SingleAsync(Expression<Func<TDocument, bool>> predicate = null, CancellationToken cancellationToken = default);
+        Task<TDocument> SingleAsync(Expression<Func<TDocument, bool>> predicate = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Asynchronously gets the count of item in a sequence.
@@ -88,7 +87,7 @@ namespace Cosmos.Entity.Mapper
         /// <param name="predicate"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public abstract Task<int> CountAsync(Expression<Func<TDocument, bool>> predicate = null, CancellationToken cancellationToken = default);
+        Task<int> CountAsync(Expression<Func<TDocument, bool>> predicate = null, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Checks if any document is in the sequence.
@@ -96,7 +95,7 @@ namespace Cosmos.Entity.Mapper
         /// <param name="predicate"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Returns true if there is at least one document in the sequence. Returns false otherwise</returns>
-        public abstract Task<bool> AnyAsync(Expression<Func<TDocument,bool>> predicate = null, CancellationToken cancellationToken= default);
+        Task<bool> AnyAsync(Expression<Func<TDocument,bool>> predicate = null, CancellationToken cancellationToken= default);
 
         /// <summary>
         /// Checks if all documents in the sequence passes the test in the specified <paramref name="predicate"/>
@@ -106,6 +105,6 @@ namespace Cosmos.Entity.Mapper
         /// <returns>
         /// <para>A task representing the asynchronous result. Would return <see langword="true"/> if every document in the sequence matches the predicate</para>
         /// </returns>
-        public abstract Task<bool> AllAsync(Expression<Func<TDocument, bool>> predicate, CancellationToken cancellationToken = default);
+        Task<bool> AllAsync(Expression<Func<TDocument, bool>> predicate, CancellationToken cancellationToken = default);
     }
 }
