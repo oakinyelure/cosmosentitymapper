@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace Cosmos.Entity.Mapper.Extensions
 {
@@ -33,6 +34,22 @@ namespace Cosmos.Entity.Mapper.Extensions
             where TContext : CosmosDbContext
         {
             return services.AddSingleton<TContext>(_ => ActivatorUtilities.CreateInstance<TContext>(_, new ContextOptions { ConnectionString = connectionString }));
+        }
+
+        /// <summary>
+        /// Registers the given cosmos entity mapper <typeparamref name="TContext"/> as a service and enables the use of a delegate to configure the 
+        /// configuration options (<see cref="ContextOptions"/>)
+        /// </summary>
+        /// <typeparam name="TContext"></typeparam>
+        /// <param name="services"></param>
+        /// <param name="configurationDelegate"></param>
+        /// <returns></returns>
+        public static IServiceCollection AddCosmosEntityMapper<TContext>(this IServiceCollection services, Action<ContextOptionsBase> configurationDelegate)
+            where TContext : CosmosDbContext
+        {
+            var configuration = new ContextOptions();
+            configurationDelegate.Invoke(configuration);
+            return services.AddSingleton<TContext>(_ => ActivatorUtilities.CreateInstance<TContext>(_, configuration));
         }
     }
 }
