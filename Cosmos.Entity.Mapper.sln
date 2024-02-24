@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cosmos.Entity.Mapper", "src/Cosmos.Entity.Mapper.csproj", "{77FA180E-8E1E-4489-BA32-0602F1232B91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cosmos.Entity.Mapper", "src\Cosmos.Entity.Mapper.csproj", "{77FA180E-8E1E-4489-BA32-0602F1232B91}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cosmos.Entity.Mapper.Tests", "tests/Cosmos.Entity.Mapper.Tests/Cosmos.Entity.Mapper.Tests.csproj", "{B3397CF3-DAC6-4CF2-8CC9-99AA4947DB9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cosmos.Entity.Mapper.Tests", "tests\Cosmos.Entity.Mapper.Tests\Cosmos.Entity.Mapper.Tests.csproj", "{B3397CF3-DAC6-4CF2-8CC9-99AA4947DB9B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

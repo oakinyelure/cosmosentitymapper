@@ -329,6 +329,16 @@
             <param name="connectionString"></param>
             <returns></returns>
         </member>
+        <member name="M:Cosmos.Entity.Mapper.Extensions.CosmosEntityMapperServiceCollectionExtensions.AddCosmosEntityMapper``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Cosmos.Entity.Mapper.ContextOptionsBase})">
+            <summary>
+            Registers the given cosmos entity mapper <typeparamref name="TContext"/> as a service and enables the use of a delegate to configure the 
+            configuration options (<see cref="T:Cosmos.Entity.Mapper.ContextOptions"/>)
+            </summary>
+            <typeparam name="TContext"></typeparam>
+            <param name="services"></param>
+            <param name="configurationDelegate"></param>
+            <returns></returns>
+        </member>
         <member name="T:Cosmos.Entity.Mapper.Extensions.QueryableExtensions">
             <summary>
             Extension methods specific to IQueryables
