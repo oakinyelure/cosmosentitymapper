@@ -46,7 +46,7 @@
             var schemaReader = SchemaDefinitionReader<CosmosDbContext>.GetInstanceFromType(context.GetType());
             var databaseSchema = schemaReader.GetAttributeInstanceFromType<DatabaseAttribute>();
             connectionStringBuilder.TryGetValue("Database",out var databaseName);
-            databaseName ??= databaseSchema?.DatabaseName;
+            databaseName = databaseSchema?.DatabaseName ?? databaseName;
             if (!connectionStringBuilder.ContainsKey("AccountEndpoint") || !connectionStringBuilder.ContainsKey("AccountKey") || databaseName is null) throw new ArgumentException($"{nameof(connectionStringBuilder.ConnectionString)} does not pass minimum requirement");
             connectionStringBuilder["Database"] = databaseName;
         }
